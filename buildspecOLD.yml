@@ -1,16 +1,14 @@
 version: 0.2
+
 phases:
-  install:
-    runtime-versions:
-      dotnet: 2.2   
-    commands:
-      - dotnet tool install -g Amazon.ElasticBeanstalk.Tools
+
   build:
     commands:
-      - cd deployment-app-csharp
-      - dotnet eb package
+      - dotnet restore ./basic-web-app.csproj
+      - dotnet build ./basic-web-app.csproj
+      - dotnet publish ./basic-web-app.csproj -o ./
 artifacts:
   files:
-    - ./basic-web-app.sln
-  discard-paths: yes
+    - '**/*'
+  base-directory: './'
   
